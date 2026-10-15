@@ -47,3 +47,4 @@ htmlcov/
 
 # Local databases & heavy temporary artifacts (optional, keep data/raw if needed, but gitignore credentials)
 # We keep data/ directories tracked via .gitkeep
+data/raw/apify_raw_*.json

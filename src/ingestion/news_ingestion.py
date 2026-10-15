@@ -171,9 +171,12 @@ class NewsIngestion:
         # Save to SQLite
         save_news_articles(articles)
 
+        tavily_is_configured = bool(self.tavily_key and not self.tavily_key.startswith("your_"))
+        exa_is_configured = bool(self.exa_key and not self.exa_key.startswith("your_"))
+
         return {
-            "tavily_configured": bool(self.tavily_key),
-            "exa_configured": bool(self.exa_key),
+            "tavily_configured": tavily_is_configured,
+            "exa_configured": exa_is_configured,
             "actual_tavily_count": actual_tavily,
             "actual_exa_count": actual_exa,
             "total_articles": len(articles),

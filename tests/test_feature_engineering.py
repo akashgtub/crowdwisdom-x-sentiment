@@ -89,13 +89,24 @@ def test_distinction_missing_data_from_neutral():
     assert feat_df.loc[pd.Timestamp("2026-02-09", tz="UTC"), "is_imputed"] == 1
 
 def test_feature_columns_n0_nowcast_leakage_prevention():
-    # For n+0 nowcasting, close_t must NOT be in the feature set (to prevent target leakage)
+    # For n+0 nowcasting, close_t and any day t close-derived features must NOT be in the feature set (to prevent target leakage)
     n0_features = get_feature_columns_for_horizon("n+0")
     assert "close" not in n0_features
     assert "high" not in n0_features
     assert "low" not in n0_features
+    assert "volume" not in n0_features
+    assert "return_1d" not in n0_features
+    assert "dist_sma_7" not in n0_features
+    assert "volatility_7d" not in n0_features
+    assert "hl_spread" not in n0_features
     assert "open" in n0_features
+    assert "overnight_gap" in n0_features
+    assert "return_1d_lag1" in n0_features
+    assert "dist_sma_7_lag1" in n0_features
 
     # For forward horizons n+1..n+5, close of day t is permitted
     n1_features = get_feature_columns_for_horizon("n+1")
     assert "close" in n1_features
+    assert "return_1d" in n1_features
+    assert "dist_sma_7" in n1_features
+

@@ -1,21 +1,21 @@
 {
   "asset": "BTC-USD",
-  "latest_price": 80655.67,
+  "latest_price": 80838.0,
   "price_bars": 179,
   "current_predictions": {
-    "n+0": 80979.84,
-    "n+1": 81180.52,
-    "n+2": 81258.89,
-    "n+3": 80501.13,
-    "n+4": 78462.26,
-    "n+5": 79959.71
+    "n+0": 80939.77,
+    "n+1": 81778.24,
+    "n+2": 80877.18,
+    "n+3": 81505.64,
+    "n+4": 80417.73,
+    "n+5": 79842.96
   },
   "strategy_metrics": {
-    "cumulative_return_pct": 6.36,
-    "annualized_return_pct": 54.13,
-    "sharpe_ratio": 2.28,
-    "sortino_ratio": 4.67,
-    "max_drawdown_pct": -4.23
+    "cumulative_return_pct": -1.53,
+    "annualized_return_pct": -10.27,
+    "sharpe_ratio": -0.7,
+    "sortino_ratio": -1.11,
+    "max_drawdown_pct": -6.65
   },
   "benchmark_metrics": {
     "cumulative_return_pct": 1.71,
@@ -24,24 +24,24 @@
     "sortino_ratio": 0.67,
     "max_drawdown_pct": -8.76
   },
-  "win_rate_pct": 34.78,
-  "total_trades": 19,
-  "long_days": 14,
-  "flat_days": 38,
+  "win_rate_pct": 28.57,
+  "total_trades": 17,
+  "long_days": 13,
+  "flat_days": 39,
   "apify_results": {
-    "token_configured": false,
+    "token_configured": true,
     "actor_id": "apidojo/tweet-scraper",
-    "actual_api_collected_count": 0,
-    "total_normalized_count": 1858,
-    "source_mode": "sample_fixture"
+    "actual_api_collected_count": 10,
+    "total_normalized_count": 10,
+    "source_mode": "live_apify"
   },
   "news_results": {
     "tavily_configured": true,
-    "exa_configured": true,
-    "actual_tavily_count": 0,
+    "exa_configured": false,
+    "actual_tavily_count": 8,
     "actual_exa_count": 0,
-    "total_articles": 4,
-    "source_mode": "sample_snapshot"
+    "total_articles": 8,
+    "source_mode": "live_api"
   },
-  "run_timestamp": "2026-10-15T06:13:54.805251+00:00"
+  "run_timestamp": "2026-10-15T06:48:02.918728+00:00"
 }

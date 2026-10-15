@@ -163,12 +163,21 @@ def build_feature_dataset(
     df["volatility_7d"] = df["return_1d"].rolling(window=7).std().fillna(0.0)
     df["volatility_14d"] = df["return_1d"].rolling(window=14).std().fillna(0.0)
 
-    # 4. Intraday Range and Volume Ratio
+    # 4. Strictly Pre-Close Features (available at open of day t for n+0 nowcast without close_t leakage)
+    df["overnight_gap"] = (df["open"] - df["close"].shift(1)) / (df["close"].shift(1) + 1e-9)
+    df["return_1d_lag1"] = df["return_1d"].shift(1).fillna(0.0)
+    df["return_3d_lag1"] = df["return_3d"].shift(1).fillna(0.0)
+    df["return_7d_lag1"] = df["return_7d"].shift(1).fillna(0.0)
+    df["dist_sma_7_lag1"] = (df["open"] - df["sma_7"].shift(1)) / (df["sma_7"].shift(1) + 1e-9)
+    df["dist_sma_20_lag1"] = (df["open"] - df["sma_20"].shift(1)) / (df["sma_20"].shift(1) + 1e-9)
+    df["volatility_7d_lag1"] = df["volatility_7d"].shift(1).fillna(0.0)
+
+    # 5. Intraday Range and Volume Ratio (available at close of day t for forward horizons n+1..n+5)
     df["hl_spread"] = (df["high"] - df["low"]) / (df["close"] + 1e-9)
     df["volume_sma_7"] = df["volume"].rolling(window=7).mean()
     df["volume_ratio_7d"] = df["volume"] / (df["volume_sma_7"] + 1e-9)
 
-    # 5. Lagged Sentiment and Volume Features
+    # 6. Lagged Sentiment and Volume Features
     df["sentiment_mean_lag1"] = df["sentiment_mean"].shift(1).fillna(0.0)
     df["sentiment_mean_lag2"] = df["sentiment_mean"].shift(2).fillna(0.0)
     df["sentiment_mean_lag3"] = df["sentiment_mean"].shift(3).fillna(0.0)
@@ -176,12 +185,12 @@ def build_feature_dataset(
     df["post_volume_lag2"] = df["post_count"].shift(2).fillna(0.0)
     df["sentiment_momentum_3d"] = df["sentiment_mean"] - df["sentiment_mean_lag3"]
 
-    # 6. Time-based features
+    # 7. Time-based features
     df["day_of_week"] = df.index.dayofweek
     df["is_weekend"] = df["day_of_week"].isin([5, 6]).astype(int)
     df["month"] = df.index.month
 
-    # 7. Targets for horizons n+0 through n+5
+    # 8. Targets for horizons n+0 through n+5
     # Target n+0: closing price of day t
     df["target_n0"] = df["close"]
     # Targets n+1 to n+5: forward closing prices
@@ -210,21 +219,21 @@ def get_feature_columns_for_horizon(horizon: str) -> List[str]:
     Zero-Lookahead Guarantee:
     - For 'n+0' (nowcasting current day close):
       Cannot use close_t or close-derived features of day t (which would leak the target!).
-      Uses open_t, day t sentiment/engagement, day t time features, and strictly lagged price features.
+      Uses open_t, overnight_gap, day t sentiment/engagement, day t time features, and strictly lagged price features from t-1.
     - For 'n+1' through 'n+5':
       Can use all features computed up to close of day t to predict future prices.
     """
     if horizon == "n+0":
-        # Strictly features available before close of day t
+        # Strictly features available before close of day t (zero target leakage)
         return [
-            "open",
+            "open", "overnight_gap",
             "sentiment_mean", "sentiment_std", "post_count",
             "likes_sum", "views_sum", "followers_mean",
             "sentiment_pos_ratio", "sentiment_neg_ratio", "has_sentiment_data",
             "sentiment_mean_lag1", "sentiment_mean_lag2", "post_volume_lag1",
             "sentiment_momentum_3d",
-            "return_1d", "return_3d", "return_7d",  # Note: computed from prior close
-            "dist_sma_7", "dist_sma_20", "volatility_7d",
+            "return_1d_lag1", "return_3d_lag1", "return_7d_lag1",
+            "dist_sma_7_lag1", "dist_sma_20_lag1", "volatility_7d_lag1",
             "day_of_week", "is_weekend"
         ]
     else:

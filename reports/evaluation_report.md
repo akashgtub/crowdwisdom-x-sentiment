@@ -2,8 +2,8 @@
 
 **Asset Analyzed**: BTC-USD  
 **Observation Window**: 2026-04-19 to 2026-10-15 (179 daily bars)  
-**Latest Reference Price**: $80,655.67 USD  
-**Report Generated**: 2026-10-15 06:13:54 UTC  
+**Latest Reference Price**: $80,838.00 USD  
+**Report Generated**: 2026-10-15 06:48:02 UTC  
 
 ---
 
@@ -29,22 +29,22 @@ The pipeline generates forecasts for six distinct horizons:
 
 | Horizon | RF MAE ($) | Naive MAE ($) | RF RMSE ($) | Naive RMSE ($) | RF MAPE (%) | Naive MAPE (%) | RF Dir. Acc. (%) | Naive Dir. Acc. (%) | OOS Samples |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **n+0** | $959.43 | $940.52 | $1,316.64 | $1,458.18 | 1.28% | 1.29% | 73.1% | 61.5% | 53 |
-| **n+1** | $1,153.32 | $979.91 | $1,796.84 | $1,452.10 | 1.55% | 1.31% | 52.9% | 66.7% | 52 |
-| **n+2** | $1,567.80 | $1,520.76 | $2,536.22 | $2,160.81 | 2.09% | 2.05% | 45.1% | 39.2% | 52 |
-| **n+3** | $1,653.10 | $1,752.38 | $2,808.57 | $2,448.34 | 2.17% | 2.35% | 44.0% | 44.0% | 51 |
-| **n+4** | $2,100.15 | $2,031.19 | $3,467.56 | $3,114.90 | 2.76% | 2.68% | 48.0% | 52.0% | 51 |
-| **n+5** | $2,186.53 | $2,156.66 | $3,746.61 | $3,468.60 | 2.85% | 2.84% | 53.1% | 49.0% | 50 |
+| **n+0** | $1,132.84 | $937.08 | $1,526.53 | $1,456.23 | 1.52% | 1.28% | 59.6% | 61.5% | 53 |
+| **n+1** | $1,056.75 | $979.91 | $1,693.41 | $1,452.10 | 1.42% | 1.31% | 54.9% | 66.7% | 52 |
+| **n+2** | $1,517.84 | $1,517.26 | $2,441.82 | $2,159.16 | 2.03% | 2.05% | 39.2% | 39.2% | 52 |
+| **n+3** | $1,600.22 | $1,752.38 | $2,744.43 | $2,448.34 | 2.11% | 2.35% | 56.0% | 44.0% | 51 |
+| **n+4** | $1,968.12 | $2,027.62 | $3,389.20 | $3,112.42 | 2.60% | 2.68% | 54.0% | 52.0% | 51 |
+| **n+5** | $2,063.19 | $2,156.66 | $3,621.92 | $3,468.60 | 2.68% | 2.84% | 57.1% | 49.0% | 50 |
 
 ### Key Forecasting Observations
 
 1. **Horizon $n+0$ (Nowcast)**:
-   - RF MAE of **$959.43** with **73.1%** directional accuracy.
+   - RF MAE of **$1,132.84** with **59.6%** directional accuracy.
    - Nowcasting benefits strongly from combining opening price levels with same-day morning sentiment momentum to anticipate closing bar drift.
 
 2. **Short Horizons ($n+1, n+2$)**:
-   - For $n+1$, directional accuracy reached **52.9%**, providing actionable alpha for the trading strategy.
-   - For $n+2$, RF MAE ($1,567.80$) marginally edged out the naive persistence benchmark ($1,520.76$).
+   - For $n+1$, directional accuracy reached **54.9%**, providing actionable alpha for the trading strategy.
+   - For $n+2$, RF MAE ($1,517.84$) marginally edged out the naive persistence benchmark ($1,517.26$).
 
 3. **Longer Horizons ($n+3, n+4, n+5$)**:
    - Error metrics predictably scale upwards with forecasting duration (from ~1.3% MAPE at $n+0$ to ~3.0% MAPE at $n+5$), reflecting expanding market entropy.
@@ -84,14 +84,14 @@ An out-of-sample **Long/Flat** strategy was executed strictly using horizon $n+1
 
 | Metric | Out-of-Sample Long/Flat Strategy | Buy & Hold Benchmark |
 | :--- | :---: | :---: |
-| **Cumulative Return** | **6.36%** | 1.71% |
-| **Annualized Return** | **54.13%** | 12.61% |
-| **Sharpe Ratio (Ann.)** | **2.28** | 0.39 |
-| **Sortino Ratio (Ann.)** | **4.67** | 0.67 |
-| **Maximum Drawdown** | **-4.23%** | -8.76% |
-| **Total Trades Executed** | 19 | 1 |
-| **Win Rate** | 34.78% | N/A |
-| **Days in Market (Long / Flat)** | 14 / 38 | 52 / 0 |
+| **Cumulative Return** | **-1.53%** | 1.71% |
+| **Annualized Return** | **-10.27%** | 12.61% |
+| **Sharpe Ratio (Ann.)** | **-0.70** | 0.39 |
+| **Sortino Ratio (Ann.)** | **-1.11** | 0.67 |
+| **Maximum Drawdown** | **-6.65%** | -8.76% |
+| **Total Trades Executed** | 17 | 1 |
+| **Win Rate** | 28.57% | N/A |
+| **Days in Market (Long / Flat)** | 13 / 39 | 52 / 0 |
 
 
 ### Quantitative Financial Limitations and Execution Friction
@@ -114,16 +114,16 @@ An out-of-sample **Long/Flat** strategy was executed strictly using horizon $n+1
 
 ## 4. Current Horizon Price Projections
 
-Based on the most recent market closing bar ($80,655.67 USD), the model projects the following price trajectory:
+Based on the most recent market closing bar ($80,838.00 USD), the model projects the following price trajectory:
 
 | Horizon | Projected Price | Expected Change vs Current |
 | :---: | :---: | :---: |
-| **n+0** | **$80,979.84** | +$324.17 (+0.40%) |
-| **n+1** | **$81,180.52** | +$524.85 (+0.65%) |
-| **n+2** | **$81,258.89** | +$603.22 (+0.75%) |
-| **n+3** | **$80,501.13** | $-154.54 (-0.19%) |
-| **n+4** | **$78,462.26** | $-2,193.41 (-2.72%) |
-| **n+5** | **$79,959.71** | $-695.96 (-0.86%) |
+| **n+0** | **$80,939.77** | +$101.77 (+0.13%) |
+| **n+1** | **$81,778.24** | +$940.24 (+1.16%) |
+| **n+2** | **$80,877.18** | +$39.18 (+0.05%) |
+| **n+3** | **$81,505.64** | +$667.64 (+0.83%) |
+| **n+4** | **$80,417.73** | $-420.27 (-0.52%) |
+| **n+5** | **$79,842.96** | $-995.04 (-1.23%) |
 
 ---
 
@@ -141,11 +141,11 @@ Generated high-resolution evaluation figures are saved in `reports/figures/`:
 
 - **Historical Price Bars**: 179 daily bars fetched via yfinance and persisted to SQLite.
 - **Apify API Ingestion**:
-  - API Token Configured: `False`
+  - API Token Configured: `True`
   - Target Actor ID: `apidojo/tweet-scraper`
-  - Actual Live Posts Ingested: `0`
-  - Total Normalized Posts Processed: `1858` (Mode: `sample_fixture`)
+  - Actual Live Posts Ingested: `10`
+  - Total Normalized Posts Processed: `10` (Mode: `live_apify`)
 - **News API Ingestion**:
-  - Tavily Key Configured: `True` | Live Ingested: `0`
-  - Exa Key Configured: `True` | Live Ingested: `0`
-  - Total News Articles Stored: `4` (Mode: `sample_snapshot`)
+  - Tavily Key Configured: `True` | Live Ingested: `8`
+  - Exa Key Configured: `False` (Optional) | Live Ingested: `0`
+  - Total News Articles Stored: `8` (Mode: `live_api`)
