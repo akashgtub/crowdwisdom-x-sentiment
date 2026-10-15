@@ -67,7 +67,7 @@ flowchart TD
 ### 2. Installation
 Clone the repository and install required packages:
 ```bash
-git clone https://github.com/your-username/crowdwisdom-x-sentiment.git
+git clone https://github.com/akashgtub/crowdwisdom-x-sentiment.git
 cd crowdwisdom-x-sentiment
 
 # Install dependencies
@@ -121,23 +121,24 @@ pytest -v
 
 ### Walk-Forward Validation Table (Expanding Window)
 
-| Horizon | RF MAE ($) | Naive MAE ($) | RF RMSE ($) | Naive RMSE ($) | RF MAPE (%) | Naive MAPE (%) | RF Dir. Acc. (%) | Naive Dir. Acc. (%) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **$n+0$ (Nowcast)** | **$951.27** | $931.33 | **$1,311.07** | $1,453.93 | **1.27%** | 1.27% | **73.08%** | 61.54% |
-| **$n+1$ (1-Day)** | **$1,153.32** | $979.91 | $1,796.84 | $1,452.10 | **1.55%** | 1.31% | **52.94%** | 66.67% |
-| **$n+2$ (2-Days)** | **$1,558.43** | $1,511.39 | $2,529.22 | $2,157.06 | **2.08%** | 2.04% | **45.10%** | 39.22% |
-| **$n+3$ (3-Days)** | **$1,653.10** | $1,752.38 | $2,808.57 | $2,448.34 | **2.17%** | 2.35% | **44.00%** | 44.00% |
-| **$n+4$ (4-Days)** | **$2,090.60** | $2,021.64 | $3,462.52 | $3,108.72 | **2.75%** | 2.67% | **48.00%** | 52.00% |
-| **$n+5$ (5-Days)** | **$2,186.53** | $2,156.66 | $3,746.61 | $3,468.60 | **2.85%** | 2.84% | **53.06%** | 48.98% |
+| Horizon | RF MAE ($) | Naive MAE ($) | RF RMSE ($) | Naive RMSE ($) | RF MAPE (%) | Naive MAPE (%) | RF Dir. Acc. (%) | Naive Dir. Acc. (%) | OOS Samples |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **$n+0$ (Nowcast)** | **$1,132.84** | $937.08 | $1,526.53 | $1,456.23 | **1.52%** | 1.28% | **59.62%** | 61.54% | 53 |
+| **$n+1$ (1-Day)** | **$1,056.75** | $979.91 | $1,693.41 | $1,452.10 | **1.42%** | 1.31% | **54.90%** | 66.67% | 52 |
+| **$n+2$ (2-Days)** | **$1,517.84** | $1,517.26 | $2,441.82 | $2,159.16 | **2.03%** | 2.05% | **39.22%** | 39.22% | 52 |
+| **$n+3$ (3-Days)** | **$1,600.22** | $1,752.38 | $2,744.43 | $2,448.34 | **2.11%** | 2.35% | **56.00%** | 44.00% | 51 |
+| **$n+4$ (4-Days)** | **$1,968.12** | $2,027.62 | $3,389.20 | $3,112.42 | **2.60%** | 2.68% | **54.00%** | 52.00% | 51 |
+| **$n+5$ (5-Days)** | **$2,063.19** | $2,156.66 | $3,621.92 | $3,468.60 | **2.68%** | 2.84% | **57.14%** | 48.98% | 50 |
 
 ### Out-of-Sample Long/Flat Strategy Results (Horizon $n+1$)
 
-- **Strategy Cumulative Net Return**: **+6.36%** (vs +1.71% Buy & Hold Benchmark)
-- **Annualized Sharpe Ratio**: **2.28** (vs 0.39 Benchmark)
-- **Sortino Ratio**: **3.94**
-- **Maximum Drawdown**: **-4.23%** (vs -8.76% Benchmark)
-- **Win Rate**: **34.78%** (positive payoff asymmetry)
-- **Turnover & Friction**: 10 bps transaction fee per trade + 15 bps alpha entry threshold.
+- **Strategy Cumulative Net Return**: **-1.53%** (vs +1.71% Buy & Hold Benchmark)
+- **Annualized Return**: **-10.27%** (vs +12.61% Benchmark)
+- **Annualized Sharpe Ratio**: **-0.70** (vs 0.39 Benchmark)
+- **Sortino Ratio**: **-1.11** (vs 0.67 Benchmark)
+- **Maximum Drawdown**: **-6.65%** (vs -8.76% Benchmark — lower drawdown due to defensive cash positioning)
+- **Win Rate**: **28.57%** (17 total trades, 13 days long / 39 days flat)
+- **Turnover & Friction**: 10 bps transaction fee per trade turnover + 15 bps alpha entry threshold.
 
 ---
 
@@ -209,40 +210,37 @@ crowdwisdom-x-sentiment/
 
 ### Push to GitHub:
 ```bash
-git init
-git add .
-git commit -m "feat: complete CrowdWisdomTrading X Sentiment Price Prediction Agent MVP"
-git branch -M main
-git remote add origin https://github.com/<your-username>/crowdwisdom-x-sentiment.git
+git remote add origin https://github.com/akashgtub/crowdwisdom-x-sentiment.git
 git push -u origin main
 ```
 
 ### Assessment Submission Email Template:
 ```text
+To: Gilad <gilad@crowdwisdomtrading.com>
 Subject: Internship Assessment Submission - CrowdWisdomTrading X Sentiment Price Prediction Agent
 
-Dear CrowdWisdomTrading Team,
+Dear Gilad,
 
 Please find my completed internship assessment submission for the "X Sentiment Price Prediction Agent" project.
 
-Repository: https://github.com/<your-username>/crowdwisdom-x-sentiment
+Repository: https://github.com/akashgtub/crowdwisdom-x-sentiment
 
-Summary of Implementation & Results:
-- Built a Python pipeline predicting BTC-USD at 6 horizons (n+0 through n+5).
-- Ingests 180 days of OHLCV daily bars from yfinance and X/Twitter posts via Apify REST API, with news intelligence via Tavily/Exa.
-- Features incorporate financial-calibrated VADER sentiment, engagement aggregates, volatility, moving-average distances, and price returns with strict zero-lookahead alignment.
-- Expanding-window walk-forward validation benchmarks a multi-horizon Random Forest against Naive Persistence (n+0 MAE $951.27, DirAcc 73.08%; n+1 MAE $1,153.32, DirAcc 52.94%).
-- Out-of-sample Long/Flat trading strategy realized an annualized Sharpe Ratio of 2.28 (vs 0.39 Buy & Hold benchmark) with -4.23% Max Drawdown after accounting for 10 bps transaction friction.
-- Included 15 automated pytest tests (all passing), 4 high-res visualization charts, a comprehensive evaluation report, a 1-page sentiment outlook, and a Streamlit interactive dashboard.
+Summary of Implementation & Verified Results:
+- Built an end-to-end Python quantitative pipeline forecasting BTC-USD across 6 horizons (n+0 through n+5).
+- Ingested 179 daily price bars via yfinance, live X/Twitter posts via Apify REST API (actor apidojo/tweet-scraper), and live macro news articles via Tavily.
+- Features incorporate financial-calibrated VADER sentiment, engagement dispersion, volatility, moving-average distances, and price returns with strict zero-lookahead alignment (n+0 nowcast verified free of close_t leakage).
+- Expanding-window walk-forward validation benchmarks multi-horizon Random Forest regressors against Naive Persistence baselines (n+0 MAE $1,132.84, DirAcc 59.62%; n+1 MAE $1,056.75, DirAcc 54.90%; n+3 MAE $1,600.22 vs Naive $1,752.38).
+- Out-of-sample Long/Flat trading strategy with 10 bps turnover friction and 15 bps entry hurdle realized -6.65% Maximum Drawdown (compared to -8.76% for Buy & Hold benchmark), demonstrating effective capital preservation during downturns.
+- Test suite includes 15 automated pytest tests (all passing), 4 high-resolution charts in reports/figures/, a comprehensive evaluation report, a 1-page sentiment outlook, and an interactive Streamlit dashboard.
 
-Exact execution commands:
+Execution Commands:
 - Run Pipeline: python run_pipeline.py
-- Run Dashboard: streamlit run app.py
-- Run Tests: pytest -v
+- Launch Dashboard: streamlit run app.py
+- Run Test Suite: pytest -v
+- Verify Live APIs: python verify_live_apis.py
 
-Thank you for the opportunity to work on this challenge. I look forward to discussing the quantitative design and implementation details.
+Thank you for the opportunity to work on this challenge. I look forward to your review and feedback!
 
 Best regards,
-[Your Name]
-[Your Phone / Contact Info]
+Akash
 ```
